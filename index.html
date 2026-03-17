@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dylan Pockot — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   DESIGN TOKENS
+══════════════════════════════════════ */
+:root {
+  --bg:#F5F2ED; --bg2:#EFEBE4; --bg3:#E8E2D9;
+  --white:#FFFFFF; --card:#FFFFFF;
+  --ink:#1C1917; --ink2:#44403C;
+  --muted:#78716C; --muted2:#A8A29E;
+  --border:#E2DDD6; --border2:#D4CEC5;
+  --accent:#B8956A; --accent-l:#F0E6D8; --accent-d:#8B6E4E;
+  --success:#16A34A;
+  --nav-bg:rgba(245,242,237,.94);
+  --r-sm:8px; --r:12px; --r-lg:16px; --r-xl:24px;
+  --sh-sm:0 1px 3px rgba(28,25,23,.07),0 1px 2px rgba(28,25,23,.04);
+  --sh:0 4px 14px rgba(28,25,23,.09),0 2px 4px rgba(28,25,23,.05);
+  --sh-lg:0 16px 40px rgba(28,25,23,.11),0 4px 12px rgba(28,25,23,.06);
+  --font:'Geist',system-ui,sans-serif;
+  --mono:'Geist Mono',monospace;
+  --transition:background .3s ease,color .3s ease,border-color .3s ease;
+}
+[data-theme="dark"] {
+  --bg:#141210; --bg2:#1B1916; --bg3:#232019;
+  --white:#1B1916; --card:#201E1B;
+  --ink:#F0EDE8; --ink2:#C9C3BA;
+  --muted:#9E9891; --muted2:#6B6560;
+  --border:#2C2924; --border2:#383330;
+  --accent:#C9A87A; --accent-l:rgba(201,168,122,.13); --accent-d:#DCC09A;
+  --nav-bg:rgba(20,18,16,.55);
+  --sh-sm:0 1px 3px rgba(0,0,0,.35),0 1px 2px rgba(0,0,0,.2);
+  --sh:0 4px 14px rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.2);
+  --sh-lg:0 16px 40px rgba(0,0,0,.5),0 4px 12px rgba(0,0,0,.3);
+}
+
+/* ══════════════════════════════════════
+   RESET + BASE
+══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--ink);
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  transition:var(--transition);
+}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+[data-theme="dark"] nav{
+  background:rgba(20,18,16,.55);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  box-shadow:0 1px 0 rgba(255,255,255,.05), 0 4px 24px rgba(0,0,0,.25);
+}
+/* ══════════════════════════════════════
+   PROGRESS BAR
+══════════════════════════════════════ */
+  position:fixed;top:0;left:0;height:2.5px;width:0;z-index:500;
+  background:linear-gradient(90deg,var(--accent-d),var(--accent),#D4B896);
+  border-radius:0 2px 2px 0;
+  transition:width .08s linear;
+  pointer-events:none;
+}
+
+/* ══════════════════════════════════════
+   NAV — top pill bar (style screenshot)
+══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:400;
+  background:rgba(245,242,237,.55);
+  backdrop-filter:blur(28px) saturate(2) brightness(1.08);
+  -webkit-backdrop-filter:blur(28px) saturate(2) brightness(1.08);
+  border-bottom:1px solid rgba(255,255,255,.55);
+  box-shadow:0 1px 0 rgba(200,180,150,.18), 0 4px 24px rgba(28,25,23,.06);
+  transition:background .3s,border-color .3s;
+}
+.nav-inner{
+  max-width:1240px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 2rem;gap:1rem;
+}
+/* pill container */
+.nav-pill-bar{
+  display:flex;align-items:center;
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:999px;padding:.28rem .32rem;
+  list-style:none;box-shadow:var(--sh-sm);gap:.08rem;
+}
+.nav-pill-bar li a{
+  display:flex;align-items:center;
+  padding:.38rem 1rem;border-radius:999px;
+  font-size:.78rem;font-weight:500;color:var(--muted);
+  text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:background .18s,color .18s,box-shadow .18s;
+}
+.nav-pill-bar li a:hover{color:var(--ink)}
+.nav-pill-bar li a.active{
+  background:var(--card);color:var(--ink);
+  box-shadow:0 1px 4px rgba(28,25,23,.1),0 0 0 .5px var(--border);
+  font-weight:600;
+}
+/* separator */
+.nav-pill-sep{
+  width:1px;height:18px;background:var(--border2);
+  margin:0 .3rem;align-self:center;flex-shrink:0;
+}
+/* right controls */
+.nav-right{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.icon-btn{
+  width:34px;height:34px;border-radius:var(--r-sm);
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:.95rem;transition:background .2s,border-color .2s,transform .15s;
+}
+.icon-btn:hover{background:var(--bg2);border-color:var(--accent);transform:scale(1.05)}
+
+/* Burger */
+.nav-burger{display:none;flex-direction:column;gap:4px}
+.nav-burger span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:1px;transition:all .3s}
+
+/* Mobile nav */
+.nav-mobile{
+  display:none;position:fixed;inset:0;z-index:390;
+  background:var(--bg);padding:5rem 1.5rem 2rem;
+  flex-direction:column;gap:.5rem;
+}
+.nav-mobile.open{display:flex}
+.nav-mobile a{
+  padding:1rem;border-radius:var(--r);font-size:1rem;font-weight:500;
+  color:var(--ink);text-decoration:none;border:1px solid var(--border);
+  background:var(--card);transition:border-color .2s;display:flex;align-items:center;gap:.8rem;
+}
+.nav-mobile a:hover{border-color:var(--accent)}
+.nav-mobile .close-mb{
+  position:absolute;top:1rem;right:1rem;
+  background:none;border:1px solid var(--border);border-radius:var(--r-sm);
+  padding:.4rem .8rem;cursor:pointer;color:var(--ink);font-size:.85rem;
+}
+
+/* ══════════════════════════════════════
+   LAYOUT — PAGES
+══════════════════════════════════════ */
+/* ══════════════════════════════════════
+   PAGE TRANSITIONS
+══════════════════════════════════════ */
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.page{
+  display:none;padding-top:62px;
+  opacity:0;
+  transform:translateY(12px);
+  transition:opacity .38s cubic-bezier(.4,0,.2,1), transform .38s cubic-bezier(.4,0,.2,1);
+  pointer-events:none;
+}
+.page.active{
+  display:block;
+  pointer-events:auto;
+}
+.page.active.page-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ══════════════════════════════════════
+   SECTION UTILITIES
+══════════════════════════════════════ */
+.section{padding:5rem 0}
+.section-alt{background:var(--white)}
+
+/* ── Section label : ligne pleine largeur avec effet scroll ── */
+.section-eyebrow{
+  display:flex;align-items:center;gap:1rem;
+  margin-bottom:.8rem;overflow:hidden;
+}
+.section-eyebrow-text{
+  font-size:.68rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent-d);white-space:nowrap;flex-shrink:0;
+}
+.section-eyebrow-line{
+  flex:1;height:1px;background:var(--border);position:relative;overflow:hidden;
+}
+.section-eyebrow-line::after{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);
+  animation:lineSweep 2.5s ease-in-out infinite;
+}
+@keyframes lineSweep{0%{left:-100%}50%{left:0%}100%{left:100%}}
+.section-eyebrow.no-anim .section-eyebrow-line::after{animation:none}
+
+.section-h2{
+  font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;
+  letter-spacing:-.02em;color:var(--ink);margin-bottom:.6rem;
+}
+.section-sub{font-size:.88rem;color:var(--muted);max-width:520px;line-height:1.75}
+.section-header{margin-bottom:3rem}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+#accueil{
+  padding:8rem 0 5rem;
+  background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);
+  position:relative;overflow:hidden;
+}
+.hero-blob{
+  position:absolute;width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,149,106,.11) 0%,transparent 70%);
+  top:-80px;right:-100px;pointer-events:none;
+  animation:blobFloat 9s ease-in-out infinite;
+}
+@keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-25px,35px) scale(1.05)}}
+
+.hero-title{
+  font-size:clamp(2.5rem,5.5vw,4.6rem);font-weight:700;
+  line-height:1.04;letter-spacing:-.03em;color:var(--ink);
+  margin-bottom:1.2rem;max-width:820px;
+  animation:fadeUp .65s .05s both;
+}
+.hero-title .grad{
+  background:linear-gradient(135deg,var(--accent-d),var(--accent));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-desc{
+  font-size:.95rem;color:var(--muted);line-height:1.8;
+  max-width:500px;margin-bottom:0;font-weight:400;
+  animation:fadeUp .65s .15s both;
+}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ══════════════════════════════════════
+   À PROPOS
+══════════════════════════════════════ */
+.about-grid{display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:start}
+
+.about-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:1.75rem;box-shadow:var(--sh-sm);
+  text-align:center;transition:var(--transition);
+}
+.about-avatar{
+  width:72px;height:72px;border-radius:var(--r);
+  background:linear-gradient(135deg,var(--accent),var(--accent-d));
+  margin:0 auto .9rem;display:flex;align-items:center;justify-content:center;font-size:1.8rem;
+}
+.about-name{font-size:1rem;font-weight:700;color:var(--ink)}
+.about-role{font-size:.73rem;color:var(--muted);margin:.2rem 0}
+.about-loc{display:inline-flex;align-items:center;gap:.3rem;font-size:.68rem;color:var(--muted2);margin-top:.4rem}
+.about-divider{height:1px;background:var(--border);margin:1.1rem 0}
+.about-tags-wrap{display:flex;flex-wrap:wrap;gap:.35rem;justify-content:center}
+.pill{
+  padding:.22rem .65rem;background:var(--accent-l);
+  border-radius:999px;font-size:.67rem;font-weight:500;color:var(--accent-d);
+}
+
+.about-right{}
+.about-bio{font-size:.88rem;color:var(--ink2);line-height:1.85;margin-bottom:2rem}
+.about-bio strong{color:var(--ink);font-weight:600}
+
+.xp-cards{display:flex;flex-direction:column;gap:.9rem}
+.xp-card{
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--r);
+  padding:1.1rem 1.3rem;display:flex;gap:1.1rem;align-items:flex-start;
+  transition:box-shadow .2s,border-color .2s,background .3s;
+}
+.xp-card:hover{box-shadow:var(--sh);border-color:var(--border2)}
+.xp-icon{
+  width:38px;height:38px;border-radius:var(--r-sm);
+  background:var(--card);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;
+  box-shadow:var(--sh-sm);
+}
+.xp-company{font-size:.85rem;font-weight:600;color:var(--ink)}
+.xp-role{font-size:.74rem;color:var(--accent-d);font-weight:500;margin:.12rem 0}
+.xp-date{font-size:.68rem;color:var(--muted);font-family:var(--mono)}
+.xp-desc{font-size:.74rem;color:var(--muted);margin-top:.45rem;line-height:1.65}
+
+/* ══════════════════════════════════════
+   COMPÉTENCES
+══════════════════════════════════════ */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.skill-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:1.4rem;box-shadow:var(--sh-sm);
+  transition:box-shadow .2s,transform .2s,background .3s,border-color .3s;
+}
+.skill-card:hover{box-shadow:var(--sh);transform:translateY(-3px)}
+.skill-card.dotted{
+  border-style:dashed;background:transparent;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.5rem;text-align:center;cursor:default;min-height:140px;
+}
+.skill-card.dotted:hover{transform:none;box-shadow:none;border-color:var(--accent)}
+.skill-card-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.9rem}
+.skill-icon{
+  width:34px;height:34px;border-radius:var(--r-sm);
+  background:var(--accent-l);display:flex;align-items:center;justify-content:center;font-size:.95rem;
+}
+.skill-title{font-size:.85rem;font-weight:600;color:var(--ink)}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.32rem}
+.skill-pill{
+  padding:.19rem .6rem;background:var(--bg2);border-radius:999px;
+  font-size:.65rem;font-weight:500;color:var(--ink2);border:1px solid var(--border);
+  transition:background .2s;
+}
+.dotted-icon{font-size:1.5rem;opacity:.4}
+.dotted-label{font-size:.75rem;color:var(--muted)}
+.dotted-sub{font-size:.67rem;color:var(--muted2)}
+
+/* ══════════════════════════════════════
+   PPE PAGE
+══════════════════════════════════════ */
+.ppe-grid{display:flex;flex-direction:column;gap:.7rem}
+.ppe-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm);
+  transition:box-shadow .2s,background .3s,border-color .3s;
+}
+.ppe-card:hover{box-shadow:var(--sh)}
+.ppe-card-head{
+  display:flex;align-items:center;
+  padding:1.15rem 1.4rem;cursor:pointer;gap:.8rem;
+  transition:background .15s;
+}
+.ppe-card-head:hover{background:var(--bg)}
+.ppe-left{display:flex;align-items:center;gap:.9rem;flex:1;min-width:0}
+.ppe-num{
+  width:30px;height:30px;border-radius:var(--r-sm);background:var(--accent-l);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:700;color:var(--accent-d);flex-shrink:0;font-family:var(--mono);
+}
+.ppe-title{font-size:.88rem;font-weight:600;color:var(--ink)}
+.ppe-subtitle{font-size:.7rem;color:var(--muted);margin-top:.1rem}
+.ppe-badge{
+  padding:.2rem .7rem;background:var(--accent-l);border-radius:999px;
+  font-size:.65rem;font-weight:600;color:var(--accent-d);white-space:nowrap;flex-shrink:0;
+}
+.ppe-chevron{color:var(--muted2);font-size:.7rem;transition:transform .25s;flex-shrink:0}
+.ppe-card.open .ppe-chevron{transform:rotate(90deg)}
+.ppe-body{max-height:0;overflow:hidden;transition:max-height .38s ease}
+.ppe-card.open .ppe-body{max-height:700px}
+.ppe-content{padding:0 1.4rem 1.4rem;border-top:1px solid var(--border)}
+.ppe-desc{font-size:.8rem;color:var(--ink2);line-height:1.8;margin:1rem 0}
+.ppe-tools{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:1.15rem}
+.ppe-tool{
+  padding:.19rem .62rem;background:var(--bg2);border-radius:999px;
+  font-size:.65rem;font-weight:500;color:var(--ink2);border:1px solid var(--border);
+}
+.pdf-zone{
+  border:2px dashed var(--border2);border-radius:var(--r);
+  padding:1.6rem;text-align:center;cursor:pointer;
+  background:var(--bg);transition:border-color .2s,background .2s;position:relative;
+}
+.pdf-zone:hover{border-color:var(--accent);background:var(--accent-l)}
+.pdf-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.pdf-zone-icon{font-size:1.3rem;opacity:.55;margin-bottom:.4rem}
+.pdf-zone-title{font-size:.78rem;font-weight:500;color:var(--ink2)}
+.pdf-zone-sub{font-size:.68rem;color:var(--muted2);margin-top:.15rem}
+.pdf-uploaded{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.7rem 1rem;background:var(--accent-l);border:1px solid rgba(184,149,106,.25);
+  border-radius:var(--r);margin-top:.6rem;
+}
+.pdf-uploaded-left{display:flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:500;color:var(--ink2)}
+.pdf-uploaded a{font-size:.75rem;font-weight:600;color:var(--accent-d);text-decoration:none}
+.pdf-uploaded a:hover{text-decoration:underline}
+.pdf-frame{width:100%;height:400px;border:1px solid var(--border);border-radius:var(--r-sm);margin-top:.6rem}
+
+/* ══════════════════════════════════════
+   PROJETS PAGE
+══════════════════════════════════════ */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+.proj-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:1.4rem;box-shadow:var(--sh-sm);
+  transition:box-shadow .2s,transform .2s,background .3s,border-color .3s;
+  display:flex;flex-direction:column;gap:.7rem;
+}
+.proj-card:hover{box-shadow:var(--sh);transform:translateY(-3px)}
+.proj-status{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:.18rem .62rem;border-radius:999px;font-size:.65rem;font-weight:600;
+}
+.proj-status.wip{background:#FEF3C7;color:#92400E}
+.proj-status.done{background:#DCFCE7;color:#15803D}
+.proj-status.planned{background:var(--bg3);color:var(--muted)}
+.proj-dot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.proj-name{font-size:.98rem;font-weight:700;color:var(--ink)}
+.proj-desc{font-size:.78rem;color:var(--muted);line-height:1.7;flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.3rem}
+.proj-tag{
+  padding:.17rem .57rem;background:var(--bg2);border-radius:999px;
+  font-size:.64rem;font-weight:500;color:var(--ink2);border:1px solid var(--border);
+}
+.proj-add{
+  border:2px dashed var(--border2);background:transparent;border-radius:var(--r-lg);
+  padding:2rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:.5rem;text-align:center;min-height:160px;
+  transition:border-color .2s,background .2s;
+}
+.proj-add:hover{border-color:var(--accent);background:var(--accent-l)}
+.proj-add-icon{
+  width:38px;height:38px;border-radius:var(--r);background:var(--bg3);
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+}
+.proj-add-label{font-size:.76rem;font-weight:500;color:var(--muted)}
+
+/* ══════════════════════════════════════
+   FORMATIONS
+══════════════════════════════════════ */
+.formations-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.formation-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:1.6rem;box-shadow:var(--sh-sm);
+  position:relative;overflow:hidden;transition:box-shadow .2s,transform .2s,background .3s;
+}
+.formation-card:hover{box-shadow:var(--sh);transform:translateY(-3px)}
+.formation-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-d));
+}
+.formation-year{font-family:var(--mono);font-size:.68rem;color:var(--muted);margin-bottom:.65rem}
+.formation-school{font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:.2rem}
+.formation-degree{font-size:.78rem;color:var(--muted);line-height:1.5;margin-bottom:.7rem}
+.formation-badge{
+  display:inline-flex;padding:.22rem .7rem;
+  background:var(--accent-l);border-radius:999px;
+  font-size:.68rem;font-weight:600;color:var(--accent-d);
+}
+
+/* ══════════════════════════════════════
+   CONTACT PAGE
+══════════════════════════════════════ */
+.contact-layout{display:grid;grid-template-columns:1fr 1.5fr;gap:2.5rem;align-items:start}
+.contact-info-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:2.2rem;box-shadow:var(--sh-sm);
+  transition:var(--transition);
+}
+.contact-info-title{font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:.5rem}
+.contact-info-sub{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.8rem}
+.contact-links{display:flex;flex-direction:column;gap:.65rem}
+.contact-link{
+  display:flex;align-items:center;gap:.8rem;
+  padding:.9rem 1rem;background:var(--bg);border:1px solid var(--border);
+  border-radius:var(--r);text-decoration:none;color:var(--ink);
+  font-size:.82rem;font-weight:500;
+  transition:border-color .2s,background .2s,transform .15s;
+}
+.contact-link:hover{border-color:var(--accent);background:var(--accent-l);transform:translateX(3px)}
+.cl-icon{
+  width:34px;height:34px;background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;flex-shrink:0;box-shadow:var(--sh-sm);
+}
+.contact-form-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r-xl);padding:2.2rem;box-shadow:var(--sh-sm);
+  transition:var(--transition);
+}
+.form-title{font-size:1.05rem;font-weight:700;color:var(--ink);margin-bottom:1.3rem}
+.cform{display:flex;flex-direction:column;gap:.9rem}
+.field{display:flex;flex-direction:column;gap:.35rem}
+.field label{font-size:.74rem;font-weight:600;color:var(--ink2)}
+.field input,.field textarea{
+  padding:.72rem .95rem;background:var(--bg);border:1.5px solid var(--border);
+  border-radius:var(--r);font-family:var(--font);font-size:.82rem;color:var(--ink);
+  outline:none;transition:border-color .2s,background .2s;resize:none;
+}
+.field input:focus,.field textarea:focus{border-color:var(--accent);background:var(--card)}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted2)}
+.field textarea{height:120px}
+.fields-row{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.btn-submit{
+  padding:.72rem;background:var(--ink);color:var(--bg);
+  border-radius:var(--r);font-family:var(--font);font-size:.85rem;font-weight:600;
+  border:none;cursor:pointer;transition:background .2s,transform .15s;
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+}
+.btn-submit:hover{transform:translateY(-1px);background:var(--ink2)}
+.btn-submit.ok{background:var(--success)}
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{
+  background:var(--card);border-top:1px solid var(--border);
+  padding:1.6rem 2rem;transition:var(--transition);
+}
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-name{font-size:.85rem;font-weight:700;color:var(--ink)}
+.footer-center{font-size:.75rem;color:var(--muted)}
+.footer-right{display:flex;align-items:center;gap:.8rem}
+.footer-icon-link{
+  width:34px;height:34px;border-radius:var(--r-sm);
+  background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;text-decoration:none;
+  transition:background .2s,border-color .2s,transform .15s;
+}
+.footer-icon-link:hover{background:var(--accent-l);border-color:var(--accent);transform:scale(1.08)}
+.footer-cv-link{
+  font-size:.75rem;font-weight:600;color:var(--accent-d);text-decoration:none;
+  padding:.3rem .7rem;border:1px solid rgba(184,149,106,.35);border-radius:999px;
+  background:var(--accent-l);transition:background .2s,border-color .2s;
+}
+.footer-cv-link:hover{background:var(--accent);color:white;border-color:var(--accent)}
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media(max-width:960px){
+  .nav-pill-bar{display:none}
+  .nav-burger{display:flex!important}
+  .about-grid{grid-template-columns:1fr}
+  .about-card{max-width:280px}
+  .contact-layout{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .container{padding:0 1rem}
+  .nav-inner{padding:.75rem 1rem}
+  .hero-title{font-size:2.3rem}
+  .section{padding:3.5rem 0}
+  .fields-row{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;text-align:center}
+  .footer-right{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<div id="pbar"></div>
+
+<!-- ══ NAV MOBILE ══ -->
+<div class="nav-mobile" id="navMobile">
+  <button class="close-mb icon-btn" onclick="closeMobile()">✕</button>
+  <a onclick="showPage('home');closeMobile()">🏠 Accueil</a>
+  <a onclick="showPage('ppe');closeMobile()">📁 PPE</a>
+  <a onclick="showPage('projects');closeMobile()">🚀 Projets personnels</a>
+  <a onclick="showPage('contact');closeMobile()">✉ Contact</a>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" onclick="showPage('home');smoothTo('accueil')" style="cursor:pointer;font-size:.88rem;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em;flex-shrink:0;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink)'">Dylan Pockot</a>
+
+    <ul class="nav-pill-bar" id="navPill">
+      <li><a onclick="showPage('home');smoothTo('accueil')" class="active" id="nl-accueil">Accueil</a></li>
+      <li><a onclick="showPage('home');smoothTo('apropos')" id="nl-apropos">À propos</a></li>
+      <li><a onclick="showPage('home');smoothTo('competences')" id="nl-comp">Compétences</a></li>
+      <li class="nav-pill-sep"></li>
+      <li><a onclick="showPage('ppe')" id="nl-ppe">PPE</a></li>
+      <li><a onclick="showPage('projects')" id="nl-proj">Projets</a></li>
+      <li class="nav-pill-sep"></li>
+      <li><a onclick="showPage('contact')" id="nl-cont">Contact</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Changer de thème">
+        <svg id="theme-icon-svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="icon-btn nav-burger" style="display:none;flex-direction:column;gap:4px" onclick="document.getElementById('navMobile').classList.add('open')">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     PAGE : ACCUEIL (Accueil + À propos + Compétences)
+══════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- HERO -->
+  <section id="accueil" style="padding:8rem 0 5rem;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);position:relative;overflow:hidden;">
+    <div class="hero-blob"></div>
+    <div class="container">
+      <h1 class="hero-title">
+        Dylan Pockot<br>
+        <span class="grad">Administrateur<br>Systèmes &amp; Réseaux</span>
+      </h1>
+      <p class="hero-desc">
+        Étudiant BAC+3 à l'INSTA Paris, spécialisé en infrastructure réseau, sécurité système et virtualisation.
+      </p>
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section id="apropos" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-text">Qui suis-je</span>
+          <div class="section-eyebrow-line"></div>
+        </div>
+        <h2 class="section-h2">À propos de moi</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-card reveal">
+          <div class="about-avatar">👤</div>
+          <div class="about-name">Dylan Pockot</div>
+          <div class="about-role">Administrateur Systèmes &amp; Réseaux</div>
+          <div class="about-loc">📍 Paris, France</div>
+          <div class="about-divider"></div>
+          <div class="about-tags-wrap">
+            <span class="pill">vCenter</span>
+            <span class="pill">pfSense</span>
+            <span class="pill">Zabbix</span>
+            <span class="pill">VMware</span>
+            <span class="pill">Docker</span>
+            <span class="pill">Windows Server</span>
+            <span class="pill">Linux</span>
+            <span class="pill" onclick="showPage('home');smoothTo('competences')" style="cursor:pointer;border:1px solid rgba(184,149,106,.35);transition:background .2s" title="Voir toutes les compétences →">…</span>
+          </div>
+        </div>
+        <div class="about-right">
+          <p class="about-bio reveal">
+            Passionné par les infrastructures informatiques et la cybersécurité, je suis actuellement en <strong>alternance en tant qu'Administrateur Systèmes &amp; Réseaux</strong> à l'INSTA Paris (BAC+3). Mon BTS SIO SISR m'a donné des bases solides en administration système, sécurité réseau et gestion de parc informatique.<br><br>
+            Je travaille quotidiennement sur des environnements <strong>Windows Server et Linux</strong>, avec une expérience concrète en virtualisation (VMware, Proxmox), en sécurité réseau (pfSense, Snort, Wazuh) et en supervision (Zabbix, Grafana).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATIONS -->
+  <section class="section" id="formations">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-text">Parcours</span>
+          <div class="section-eyebrow-line"></div>
+        </div>
+        <h2 class="section-h2">Formations &amp; diplômes</h2>
+      </div>
+      <div class="formations-grid">
+        <div class="formation-card reveal">
+          <div class="formation-year">2026 — 2028</div>
+          <div class="formation-school">INSTA — Paris 75005</div>
+          <div class="formation-degree">Directeur de projet en infrastructures informatiques sécurisées</div>
+          <span class="formation-badge">BAC +5</span>
+        </div>
+        <div class="formation-card reveal">
+          <div class="formation-year">2025 — 2026</div>
+          <div class="formation-school">INSTA — Paris 75005</div>
+          <div class="formation-degree">Administrateur d'infrastructures sécurisées</div>
+          <span class="formation-badge">BAC +3</span>
+        </div>
+        <div class="formation-card reveal">
+          <div class="formation-year">2023 — 2025</div>
+          <div class="formation-school">INSTA — Paris 75005</div>
+          <div class="formation-degree">BTS SIO — option SISR</div>
+          <span class="formation-badge">BAC +2</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPÉTENCES -->
+  <section id="competences" class="section section-alt">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-text">Savoir-faire</span>
+          <div class="section-eyebrow-line"></div>
+        </div>
+        <h2 class="section-h2">Compétences techniques</h2>
+        <p class="section-sub">Un aperçu des technologies maîtrisées — les détails complets sont dans les PPE.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon">🌐</div>
+            <div class="skill-title">Réseaux</div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">TCP / IP</span><span class="skill-pill">VLAN</span>
+            <span class="skill-pill">VPN</span><span class="skill-pill">WAN / LAN</span>
+            <span class="skill-pill">DNS / DHCP</span><span class="skill-pill">SSH / FTP</span>
+            <span class="skill-pill">ACL</span><span class="skill-pill">VoIP</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon">🔒</div>
+            <div class="skill-title">Sécurité</div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">pfSense</span><span class="skill-pill">Snort</span>
+            <span class="skill-pill">Wazuh</span><span class="skill-pill">CrowdSec</span>
+            <span class="skill-pill">IPS / IDS</span><span class="skill-pill">Pare-feu</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon">⚙️</div>
+            <div class="skill-title">Virtualisation &amp; Infra</div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">VMware vSphere</span><span class="skill-pill">vCenter</span>
+            <span class="skill-pill">ESXi</span><span class="skill-pill">Proxmox</span>
+            <span class="skill-pill">Docker</span><span class="skill-pill">vMotion</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon">🖥️</div>
+            <div class="skill-title">Systèmes</div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Windows Server</span><span class="skill-pill">Debian</span>
+            <span class="skill-pill">Ubuntu</span><span class="skill-pill">Kali-Linux</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon">📊</div>
+            <div class="skill-title">Supervision &amp; Services</div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Zabbix</span><span class="skill-pill">Grafana</span>
+            <span class="skill-pill">Beszel</span><span class="skill-pill">GLPI</span>
+            <span class="skill-pill">AD-DS</span><span class="skill-pill">GPO</span>
+            <span class="skill-pill">WDS</span><span class="skill-pill">O365</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-head">
+            <div class="skill-icon">💾</div>
+            <div class="skill-title">Sauvegarde &amp; PRA</div>
+          </div>
+          <div class="skill-pills">
+            <span class="skill-pill">Veeam B&amp;R</span><span class="skill-pill">TrueNAS</span>
+          </div>
+        </div>
+        <div class="skill-card dotted reveal">
+          <div class="dotted-icon">📂</div>
+          <div class="dotted-label">Et bien plus encore…</div>
+          <div class="dotted-sub">Retrouvez un aperçu de ces compétences dans la section <span style="color:var(--accent-d);font-weight:600;cursor:pointer" onclick="showPage('ppe')">PPE →</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /page-home -->
+
+<!-- ══════════════════════════════════════
+     PAGE : PPE
+══════════════════════════════════════ -->
+<div class="page" id="page-ppe">
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-text">BTS SIO SISR</span>
+          <div class="section-eyebrow-line"></div>
+        </div>
+        <h2 class="section-h2">Projets PPE</h2>
+        <p class="section-sub">Projets Professionnels Encadrés. Cliquez pour voir les détails et joindre la procédure PDF.</p>
+      </div>
+      <div class="ppe-grid">
+
+        <div class="ppe-card" id="p1">
+          <div class="ppe-card-head" onclick="togglePPE('p1')">
+            <div class="ppe-left">
+              <div class="ppe-num">01</div>
+              <div><div class="ppe-title">Supervision réseau avec Zabbix</div><div class="ppe-subtitle">Monitoring · Alertes · Tableaux de bord</div></div>
+            </div>
+            <span class="ppe-badge">Supervision</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Mise en place d'une solution complète de supervision du réseau et des services via Zabbix. Configuration des hôtes, triggers d'alerte, graphiques et tableaux de bord pour un monitoring temps réel.</p>
+            <div class="ppe-tools"><span class="ppe-tool">Zabbix</span><span class="ppe-tool">Linux</span><span class="ppe-tool">SNMP</span><span class="ppe-tool">MySQL</span><span class="ppe-tool">Apache</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p1').click()">
+              <input type="file" id="f-p1" accept=".pdf" style="display:none" onchange="handlePDF('p1',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p1"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p2">
+          <div class="ppe-card-head" onclick="togglePPE('p2')">
+            <div class="ppe-left">
+              <div class="ppe-num">02</div>
+              <div><div class="ppe-title">Détection d'intrusions avec Snort</div><div class="ppe-subtitle">IDS · Sécurité réseau · Analyse de trafic</div></div>
+            </div>
+            <span class="ppe-badge">Sécurité</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Installation et configuration de Snort pour la détection d'intrusions sur le réseau interne. Création de règles personnalisées, analyse des alertes et journalisation des événements suspects.</p>
+            <div class="ppe-tools"><span class="ppe-tool">Snort</span><span class="ppe-tool">Linux</span><span class="ppe-tool">IDS/IPS</span><span class="ppe-tool">PCAP</span><span class="ppe-tool">Wireshark</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p2').click()">
+              <input type="file" id="f-p2" accept=".pdf" style="display:none" onchange="handlePDF('p2',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p2"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p3">
+          <div class="ppe-card-head" onclick="togglePPE('p3')">
+            <div class="ppe-left">
+              <div class="ppe-num">03</div>
+              <div><div class="ppe-title">Pare-feu pfSense</div><div class="ppe-subtitle">Firewall · NAT · VPN · VLAN</div></div>
+            </div>
+            <span class="ppe-badge">Sécurité</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Mise en place d'un pare-feu pfSense sécurisant un réseau local. Configuration des règles de filtrage, du NAT, des VLANs et gestion des accès pour protéger l'infrastructure interne.</p>
+            <div class="ppe-tools"><span class="ppe-tool">pfSense</span><span class="ppe-tool">FreeBSD</span><span class="ppe-tool">NAT</span><span class="ppe-tool">VLAN</span><span class="ppe-tool">VPN</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p3').click()">
+              <input type="file" id="f-p3" accept=".pdf" style="display:none" onchange="handlePDF('p3',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p3"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p4">
+          <div class="ppe-card-head" onclick="togglePPE('p4')">
+            <div class="ppe-left">
+              <div class="ppe-num">04</div>
+              <div><div class="ppe-title">Gestion du parc avec GLPI</div><div class="ppe-subtitle">ITSM · Inventaire · Ticketing</div></div>
+            </div>
+            <span class="ppe-badge">Administration</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Déploiement de la solution GLPI pour la gestion du parc informatique. Inventaire automatique via FusionInventory, configuration du helpdesk et des workflows de tickets.</p>
+            <div class="ppe-tools"><span class="ppe-tool">GLPI</span><span class="ppe-tool">FusionInventory</span><span class="ppe-tool">MariaDB</span><span class="ppe-tool">Apache</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p4').click()">
+              <input type="file" id="f-p4" accept=".pdf" style="display:none" onchange="handlePDF('p4',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p4"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p5">
+          <div class="ppe-card-head" onclick="togglePPE('p5')">
+            <div class="ppe-left">
+              <div class="ppe-num">05</div>
+              <div><div class="ppe-title">Partage de fichiers Samba</div><div class="ppe-subtitle">SMB · Debian 12 · Partage réseau</div></div>
+            </div>
+            <span class="ppe-badge">Services</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Mise en place d'un service de partage de fichiers avec Samba sur Debian 12. Configuration des partages, gestion des permissions et intégration avec un domaine Active Directory.</p>
+            <div class="ppe-tools"><span class="ppe-tool">Samba</span><span class="ppe-tool">Debian 12</span><span class="ppe-tool">SMB</span><span class="ppe-tool">Active Directory</span><span class="ppe-tool">ACL</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p5').click()">
+              <input type="file" id="f-p5" accept=".pdf" style="display:none" onchange="handlePDF('p5',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p5"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p6">
+          <div class="ppe-card-head" onclick="togglePPE('p6')">
+            <div class="ppe-left">
+              <div class="ppe-num">06</div>
+              <div><div class="ppe-title">Sauvegarde automatique Windows Server</div><div class="ppe-subtitle">Backup · Planification · Restauration</div></div>
+            </div>
+            <span class="ppe-badge">Sauvegarde</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Mise en place d'un système de sauvegarde automatique sous Windows Server. Stratégie 3-2-1, tâches planifiées, tests de restauration et monitoring des sauvegardes.</p>
+            <div class="ppe-tools"><span class="ppe-tool">Windows Server</span><span class="ppe-tool">Veeam</span><span class="ppe-tool">Task Scheduler</span><span class="ppe-tool">ReFS</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p6').click()">
+              <input type="file" id="f-p6" accept=".pdf" style="display:none" onchange="handlePDF('p6',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p6"></div>
+          </div></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div><!-- /page-ppe -->
+
+<!-- ══════════════════════════════════════
+     PAGE : PROJETS PERSONNELS
+══════════════════════════════════════ -->
+<div class="page" id="page-projects">
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-text">Personnel</span>
+          <div class="section-eyebrow-line"></div>
+        </div>
+        <h2 class="section-h2">Projets personnels</h2>
+        <p class="section-sub">Projets réalisés sur mon temps personnel afin de mettre en pratique et de combiner mes compétences en administration système, réseau et sécurité informatique.</p>
+      </div>
+      <div class="projects-grid" id="projectsGrid">
+        <div class="proj-card reveal">
+          <span class="proj-status wip"><span class="proj-dot"></span>En cours</span>
+          <div class="proj-name">Mise en place de la haute disponibilité dans l'infrastructure informatique</div>
+          <p class="proj-desc">Conception et déploiement d'un cluster pfSense en haute disponibilité (CARP) pour une agence de voyage. Infrastructure sécurisée avec VPN, VLAN, supervision et gestion des logs.</p>
+          <div class="proj-tags"><span class="proj-tag">pfSense</span><span class="proj-tag">CARP / HA</span><span class="proj-tag">VLAN</span><span class="proj-tag">VPN</span><span class="proj-tag">Zabbix</span><span class="proj-tag">VMware</span><span class="proj-tag">Active Directory</span></div>
+        </div>
+        <div class="proj-card reveal">
+          <span class="proj-status done"><span class="proj-dot"></span>Terminé</span>
+          <div class="proj-name">Plan de reprise d'activité avec Veeam</div>
+          <p class="proj-desc">Mise en place d'un PRA complet avec Veeam Backup &amp; Replication 13. Stratégie 3-2-1-1-0, réplication de VMs par tiers de priorité (AD/DNS, supervision, services).</p>
+          <div class="proj-tags"><span class="proj-tag">Veeam B&amp;R 13</span><span class="proj-tag">Windows Server</span><span class="proj-tag">VMware ESXi</span><span class="proj-tag">ReFS</span><span class="proj-tag">Règle 3-2-1-1-0</span><span class="proj-tag">PRA/PCA</span><span class="proj-tag">Thick Provisioning</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-projects -->
+
+<!-- ══════════════════════════════════════
+     PAGE : CONTACT
+══════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-eyebrow">
+          <span class="section-eyebrow-text">Me contacter</span>
+          <div class="section-eyebrow-line"></div>
+        </div>
+        <h2 class="section-h2">Prendre contact</h2>
+      </div>
+      <div class="contact-layout">
+        <div class="contact-info-card">
+          <div class="contact-info-title">Discutons ensemble</div>
+          <p class="contact-info-sub">Que ce soit pour une opportunité, un projet ou simplement échanger, n'hésitez pas à me contacter.</p>
+          <div class="contact-links">
+            <a href="mailto:pockotdylan@gmail.com" class="contact-link">
+              <div class="cl-icon">✉️</div>pockotdylan@gmail.com
+            </a>
+            <a href="tel:0695903505" class="contact-link">
+              <div class="cl-icon">📞</div>06 95 90 35 05
+            </a>
+            <div class="contact-link"><div class="cl-icon">📍</div>Paris, France — Permis B</div>
+            <div class="contact-link"><div class="cl-icon">🎓</div>Alternance · 1 sem. école / 3 sem. entreprise</div>
+          </div>
+        </div>
+        <div class="contact-form-card">
+          <div class="form-title">Envoyer un message</div>
+          <form class="cform" onsubmit="submitForm(event)">
+            <div class="fields-row">
+              <div class="field"><label>Nom</label><input type="text" placeholder="Votre nom" required></div>
+              <div class="field"><label>Email</label><input type="email" placeholder="votre@email.com" required></div>
+            </div>
+            <div class="field"><label>Sujet</label><input type="text" placeholder="Objet du message"></div>
+            <div class="field"><label>Message</label><textarea placeholder="Votre message..." required></textarea></div>
+            <button type="submit" class="btn-submit" id="submitBtn">Envoyer le message →</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- /page-contact -->
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-name">Dylan Pockot</span>
+    <span class="footer-center">Paris © 2026</span>
+    <div class="footer-right">
+      <a href="mailto:pockotdylan@gmail.com" class="footer-icon-link" title="Envoyer un email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </a>
+      <a href="tel:0695903505" class="footer-icon-link" title="Appeler">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 13.5 19.79 19.79 0 0 1 1.61 4.93 2 2 0 0 1 3.59 2.73h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17.5z"/></svg>
+      </a>
+      <a href="CV_Pockot_Dylan.pdf" target="_blank" class="footer-cv-link">📄 CV</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── THEME ── */
+const html = document.documentElement;
+let dark = false;
+const moonSVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+const sunSVG  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+function toggleTheme(){
+  dark = !dark;
+  html.setAttribute('data-theme', dark ? 'dark' : 'light');
+  document.getElementById('theme-icon-svg').innerHTML = dark ? sunSVG : moonSVG;
+}
+
+/* ── NAV ACTIVE ── */
+const scrollNavMap = {accueil:'nl-accueil', apropos:'nl-apropos', competences:'nl-comp'};
+const pageNavMap   = {home:'nl-accueil', ppe:'nl-ppe', projects:'nl-proj', contact:'nl-cont'};
+function setNavActive(id){
+  document.querySelectorAll('.nav-pill-bar a').forEach(a => a.classList.remove('active'));
+  const el = document.getElementById(id);
+  if(el) el.classList.add('active');
+}
+
+/* ── PAGES ── */
+const pages = ['home','ppe','projects','contact'];
+let currentPage = 'home';
+let isTransitioning = false;
+
+function showPage(p){
+  if(p === currentPage || isTransitioning) return;
+  isTransitioning = true;
+
+  const outEl = document.getElementById('page-' + currentPage);
+  const inEl  = document.getElementById('page-' + p);
+
+  // Fade out current page
+  outEl.style.transition = 'opacity .22s ease, transform .22s ease';
+  outEl.style.opacity = '0';
+  outEl.style.transform = 'translateY(-8px)';
+
+  setTimeout(() => {
+    // Hide old, show new
+    outEl.classList.remove('active','page-visible');
+    outEl.style.opacity = '';
+    outEl.style.transform = '';
+    outEl.style.transition = '';
+
+    inEl.classList.add('active');
+    // Don't reset scroll — keep where user is
+    currentPage = p;
+    setNavActive(pageNavMap[p]);
+    revealVisible();
+
+    // Trigger fade-in on next frame
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        inEl.classList.add('page-visible');
+        isTransitioning = false;
+      });
+    });
+  }, 200);
+}
+
+// Init first page visible
+document.getElementById('page-home').classList.add('page-visible');
+
+function updateNav(p){ setNavActive(pageNavMap[p]); }
+
+/* ── SMOOTH SCROLL HOME ── */
+function smoothTo(id){
+  if(currentPage !== 'home'){ showPage('home'); setTimeout(()=>smoothTo(id), 300); return; }
+  const el = document.getElementById(id);
+  if(!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY - 70;
+  window.scrollTo({top, behavior:'smooth'});
+  setNavActive(scrollNavMap[id] || 'nl-accueil');
+}
+
+/* ── PROGRESS BAR + SCROLL SPY ── */
+const pbar = document.getElementById('pbar');
+window.addEventListener('scroll', ()=>{
+  pbar.style.width = Math.min((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100,100)+'%';
+  if(currentPage !== 'home') return;
+  const spy = [{id:'competences',nk:'nl-comp'},{id:'formations',nk:'nl-comp'},{id:'apropos',nk:'nl-apropos'},{id:'accueil',nk:'nl-accueil'}];
+  for(const s of spy){
+    const el = document.getElementById(s.id);
+    if(el && el.getBoundingClientRect().top < 130){ setNavActive(s.nk); break; }
+  }
+}, {passive:true});
+
+/* ── MOBILE NAV ── */
+function closeMobile(){
+  document.getElementById('navMobile').classList.remove('open');
+}
+
+/* ── PPE ACCORDION ── */
+function togglePPE(id){
+  const c = document.getElementById(id);
+  const open = c.classList.contains('open');
+  document.querySelectorAll('.ppe-card').forEach(x=>x.classList.remove('open'));
+  if(!open) c.classList.add('open');
+}
+
+/* ── PDF UPLOAD ── */
+function handlePDF(id, input){
+  const file = input.files[0];
+  if(!file) return;
+  const url = URL.createObjectURL(file);
+  document.getElementById('pd-'+id).innerHTML = `
+    <div class="pdf-uploaded">
+      <div class="pdf-uploaded-left">📎 ${file.name}</div>
+      <a href="${url}" target="_blank">Ouvrir →</a>
+    </div>
+    <iframe src="${url}" class="pdf-frame"></iframe>`;
+  input.closest('.pdf-zone').style.display='none';
+}
+
+/* ── FORM ── */
+function submitForm(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = '✓ Message envoyé !';
+  btn.classList.add('ok');
+  setTimeout(()=>{ btn.textContent='Envoyer le message →'; btn.classList.remove('ok'); e.target.reset(); }, 3000);
+}
+
+/* ── SCROLL REVEAL ── */
+function revealVisible(){
+  document.querySelectorAll('.reveal').forEach(el => {
+    const r = el.getBoundingClientRect();
+    if(r.top < window.innerHeight - 60) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll', revealVisible, {passive:true});
+revealVisible();
+
+// On page load, mark accueil active
+updateNav('home');
+</script>
+</body>
+</html>
