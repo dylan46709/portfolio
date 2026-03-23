@@ -39,6 +39,7 @@
   --sh:0 4px 14px rgba(0,0,0,.4),0 2px 4px rgba(0,0,0,.2);
   --sh-lg:0 16px 40px rgba(0,0,0,.5),0 4px 12px rgba(0,0,0,.3);
 }
+
 /* ══════════════════════════════════════
    RESET + BASE
 ══════════════════════════════════════ */
@@ -52,6 +53,7 @@ body{
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--bg2)}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
 [data-theme="dark"] nav{
   background:rgba(20,18,16,.55);
   border-bottom:1px solid rgba(255,255,255,.08);
@@ -60,13 +62,13 @@ body{
 /* ══════════════════════════════════════
    PROGRESS BAR
 ══════════════════════════════════════ */
-#pbar {
   position:fixed;top:0;left:0;height:2.5px;width:0;z-index:500;
   background:linear-gradient(90deg,var(--accent-d),var(--accent),#D4B896);
   border-radius:0 2px 2px 0;
   transition:width .08s linear;
   pointer-events:none;
 }
+
 /* ══════════════════════════════════════
    NAV — top pill bar (style screenshot)
 ══════════════════════════════════════ */
@@ -118,9 +120,11 @@ nav{
   cursor:pointer;font-size:.95rem;transition:background .2s,border-color .2s,transform .15s;
 }
 .icon-btn:hover{background:var(--bg2);border-color:var(--accent);transform:scale(1.05)}
+
 /* Burger */
 .nav-burger{display:none;flex-direction:column;gap:4px}
 .nav-burger span{display:block;width:18px;height:1.5px;background:var(--ink);border-radius:1px;transition:all .3s}
+
 /* Mobile nav */
 .nav-mobile{
   display:none;position:fixed;inset:0;z-index:390;
@@ -139,6 +143,7 @@ nav{
   background:none;border:1px solid var(--border);border-radius:var(--r-sm);
   padding:.4rem .8rem;cursor:pointer;color:var(--ink);font-size:.85rem;
 }
+
 /* ══════════════════════════════════════
    LAYOUT — PAGES
 ══════════════════════════════════════ */
@@ -161,11 +166,13 @@ nav{
   opacity:1;
   transform:translateY(0);
 }
+
 /* ══════════════════════════════════════
    SECTION UTILITIES
 ══════════════════════════════════════ */
 .section{padding:5rem 0}
 .section-alt{background:var(--white)}
+
 /* ── Section label : ligne pleine largeur avec effet scroll ── */
 .section-eyebrow{
   display:flex;align-items:center;gap:1rem;
@@ -185,12 +192,14 @@ nav{
 }
 @keyframes lineSweep{0%{left:-100%}50%{left:0%}100%{left:100%}}
 .section-eyebrow.no-anim .section-eyebrow-line::after{animation:none}
+
 .section-h2{
   font-size:clamp(1.7rem,3vw,2.4rem);font-weight:700;
   letter-spacing:-.02em;color:var(--ink);margin-bottom:.6rem;
 }
 .section-sub{font-size:.88rem;color:var(--muted);max-width:520px;line-height:1.75}
 .section-header{margin-bottom:3rem}
+
 /* ══════════════════════════════════════
    HERO
 ══════════════════════════════════════ */
@@ -206,6 +215,7 @@ nav{
   animation:blobFloat 9s ease-in-out infinite;
 }
 @keyframes blobFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-25px,35px) scale(1.05)}}
+
 .hero-title{
   font-size:clamp(2.5rem,5.5vw,4.6rem);font-weight:700;
   line-height:1.04;letter-spacing:-.03em;color:var(--ink);
@@ -221,12 +231,15 @@ nav{
   max-width:500px;margin-bottom:0;font-weight:400;
   animation:fadeUp .65s .15s both;
 }
+
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
 /* ══════════════════════════════════════
    À PROPOS
 ══════════════════════════════════════ */
 .about-grid{display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:start}
+
 .about-card{
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r-lg);padding:1.75rem;box-shadow:var(--sh-sm);
@@ -246,9 +259,11 @@ nav{
   padding:.22rem .65rem;background:var(--accent-l);
   border-radius:999px;font-size:.67rem;font-weight:500;color:var(--accent-d);
 }
+
 .about-right{}
 .about-bio{font-size:.88rem;color:var(--ink2);line-height:1.85;margin-bottom:2rem}
 .about-bio strong{color:var(--ink);font-weight:600}
+
 .xp-cards{display:flex;flex-direction:column;gap:.9rem}
 .xp-card{
   background:var(--bg);border:1px solid var(--border);border-radius:var(--r);
@@ -266,6 +281,7 @@ nav{
 .xp-role{font-size:.74rem;color:var(--accent-d);font-weight:500;margin:.12rem 0}
 .xp-date{font-size:.68rem;color:var(--muted);font-family:var(--mono)}
 .xp-desc{font-size:.74rem;color:var(--muted);margin-top:.45rem;line-height:1.65}
+
 /* ══════════════════════════════════════
    COMPÉTENCES
 ══════════════════════════════════════ */
@@ -297,6 +313,7 @@ nav{
 .dotted-icon{font-size:1.5rem;opacity:.4}
 .dotted-label{font-size:.75rem;color:var(--muted)}
 .dotted-sub{font-size:.67rem;color:var(--muted2)}
+
 /* ══════════════════════════════════════
    PPE PAGE
 ══════════════════════════════════════ */
@@ -355,6 +372,7 @@ nav{
 .pdf-uploaded a{font-size:.75rem;font-weight:600;color:var(--accent-d);text-decoration:none}
 .pdf-uploaded a:hover{text-decoration:underline}
 .pdf-frame{width:100%;height:400px;border:1px solid var(--border);border-radius:var(--r-sm);margin-top:.6rem}
+
 /* ══════════════════════════════════════
    PROJETS PAGE
 ══════════════════════════════════════ */
@@ -393,6 +411,7 @@ nav{
   display:flex;align-items:center;justify-content:center;font-size:1.1rem;
 }
 .proj-add-label{font-size:.76rem;font-weight:500;color:var(--muted)}
+
 /* ══════════════════════════════════════
    FORMATIONS
 ══════════════════════════════════════ */
@@ -415,6 +434,7 @@ nav{
   background:var(--accent-l);border-radius:999px;
   font-size:.68rem;font-weight:600;color:var(--accent-d);
 }
+
 /* ══════════════════════════════════════
    CONTACT PAGE
 ══════════════════════════════════════ */
@@ -466,14 +486,46 @@ nav{
 }
 .btn-submit:hover{transform:translateY(-1px);background:var(--ink2)}
 .btn-submit.ok{background:var(--success)}
-#formStatus {
-  font-size: .82rem;
-  text-align: center;
-  margin-top: .6rem;
-  min-height: 1.2em;
+
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+footer{
+  background:var(--card);border-top:1px solid var(--border);
+  padding:1.6rem 2rem;transition:var(--transition);
 }
-#formStatus.success { color: var(--success); }
-#formStatus.error   { color: #dc2626; }
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1rem;
+}
+.footer-name{font-size:.85rem;font-weight:700;color:var(--ink)}
+.footer-center{font-size:.75rem;color:var(--muted)}
+.footer-right{display:flex;align-items:center;gap:.8rem}
+.footer-icon-link{
+  width:34px;height:34px;border-radius:var(--r-sm);
+  background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.95rem;text-decoration:none;
+  transition:background .2s,border-color .2s,transform .15s;
+}
+.footer-icon-link:hover{background:var(--accent-l);border-color:var(--accent);transform:scale(1.08)}
+.footer-cv-link{
+  font-size:.75rem;font-weight:600;color:var(--accent-d);text-decoration:none;
+  padding:.3rem .7rem;border:1px solid rgba(184,149,106,.35);border-radius:999px;
+  background:var(--accent-l);transition:background .2s,border-color .2s;
+}
+.footer-cv-link:hover{background:var(--accent);color:white;border-color:var(--accent)}
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
 @media(max-width:960px){
   .nav-pill-bar{display:none}
   .nav-burger{display:flex!important}
@@ -493,7 +545,9 @@ nav{
 </style>
 </head>
 <body>
+
 <div id="pbar"></div>
+
 <!-- ══ NAV MOBILE ══ -->
 <div class="nav-mobile" id="navMobile">
   <button class="close-mb icon-btn" onclick="closeMobile()">✕</button>
@@ -502,10 +556,12 @@ nav{
   <a onclick="showPage('projects');closeMobile()">🚀 Projets personnels</a>
   <a onclick="showPage('contact');closeMobile()">✉ Contact</a>
 </div>
+
 <!-- ══ NAV ══ -->
 <nav>
   <div class="nav-inner">
     <a class="nav-logo" onclick="showPage('home');smoothTo('accueil')" style="cursor:pointer;font-size:.88rem;font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em;flex-shrink:0;transition:color .2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink)'">Dylan Pockot</a>
+
     <ul class="nav-pill-bar" id="navPill">
       <li><a onclick="showPage('home');smoothTo('accueil')" class="active" id="nl-accueil">Accueil</a></li>
       <li><a onclick="showPage('home');smoothTo('apropos')" id="nl-apropos">À propos</a></li>
@@ -516,6 +572,7 @@ nav{
       <li class="nav-pill-sep"></li>
       <li><a onclick="showPage('contact')" id="nl-cont">Contact</a></li>
     </ul>
+
     <div class="nav-right">
       <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" title="Changer de thème">
         <svg id="theme-icon-svg" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -526,10 +583,12 @@ nav{
     </div>
   </div>
 </nav>
+
 <!-- ══════════════════════════════════════
      PAGE : ACCUEIL (Accueil + À propos + Compétences)
 ══════════════════════════════════════ -->
 <div class="page active" id="page-home">
+
   <!-- HERO -->
   <section id="accueil" style="padding:8rem 0 5rem;background:linear-gradient(160deg,var(--bg) 0%,var(--bg2) 100%);position:relative;overflow:hidden;">
     <div class="hero-blob"></div>
@@ -543,6 +602,7 @@ nav{
       </p>
     </div>
   </section>
+
   <!-- À PROPOS -->
   <section id="apropos" class="section section-alt">
     <div class="container">
@@ -580,6 +640,7 @@ nav{
       </div>
     </div>
   </section>
+
   <!-- FORMATIONS -->
   <section class="section" id="formations">
     <div class="container">
@@ -612,6 +673,7 @@ nav{
       </div>
     </div>
   </section>
+
   <!-- COMPÉTENCES -->
   <section id="competences" class="section section-alt">
     <div class="container">
@@ -697,7 +759,9 @@ nav{
       </div>
     </div>
   </section>
+
 </div><!-- /page-home -->
+
 <!-- ══════════════════════════════════════
      PAGE : PPE
 ══════════════════════════════════════ -->
@@ -713,6 +777,7 @@ nav{
         <p class="section-sub">Projets Professionnels Encadrés. Cliquez pour voir les détails et joindre la procédure PDF.</p>
       </div>
       <div class="ppe-grid">
+
         <div class="ppe-card" id="p1">
           <div class="ppe-card-head" onclick="togglePPE('p1')">
             <div class="ppe-left">
@@ -734,11 +799,122 @@ nav{
             <div id="pd-p1"></div>
           </div></div>
         </div>
-        <!-- Les autres PPE cards restent identiques – je ne les répète pas ici pour brevité -->
+
+        <div class="ppe-card" id="p2">
+          <div class="ppe-card-head" onclick="togglePPE('p2')">
+            <div class="ppe-left">
+              <div class="ppe-num">02</div>
+              <div><div class="ppe-title">Détection d'intrusions avec Snort</div><div class="ppe-subtitle">IDS · Sécurité réseau · Analyse de trafic</div></div>
+            </div>
+            <span class="ppe-badge">Sécurité</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Installation et configuration de Snort pour la détection d'intrusions sur le réseau interne. Création de règles personnalisées, analyse des alertes et journalisation des événements suspects.</p>
+            <div class="ppe-tools"><span class="ppe-tool">Snort</span><span class="ppe-tool">Linux</span><span class="ppe-tool">IDS/IPS</span><span class="ppe-tool">PCAP</span><span class="ppe-tool">Wireshark</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p2').click()">
+              <input type="file" id="f-p2" accept=".pdf" style="display:none" onchange="handlePDF('p2',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p2"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p3">
+          <div class="ppe-card-head" onclick="togglePPE('p3')">
+            <div class="ppe-left">
+              <div class="ppe-num">03</div>
+              <div><div class="ppe-title">Pare-feu pfSense</div><div class="ppe-subtitle">Firewall · NAT · VPN · VLAN</div></div>
+            </div>
+            <span class="ppe-badge">Sécurité</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Mise en place d'un pare-feu pfSense sécurisant un réseau local. Configuration des règles de filtrage, du NAT, des VLANs et gestion des accès pour protéger l'infrastructure interne.</p>
+            <div class="ppe-tools"><span class="ppe-tool">pfSense</span><span class="ppe-tool">FreeBSD</span><span class="ppe-tool">NAT</span><span class="ppe-tool">VLAN</span><span class="ppe-tool">VPN</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p3').click()">
+              <input type="file" id="f-p3" accept=".pdf" style="display:none" onchange="handlePDF('p3',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p3"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p4">
+          <div class="ppe-card-head" onclick="togglePPE('p4')">
+            <div class="ppe-left">
+              <div class="ppe-num">04</div>
+              <div><div class="ppe-title">Gestion du parc avec GLPI</div><div class="ppe-subtitle">ITSM · Inventaire · Ticketing</div></div>
+            </div>
+            <span class="ppe-badge">Administration</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Déploiement de la solution GLPI pour la gestion du parc informatique. Inventaire automatique via FusionInventory, configuration du helpdesk et des workflows de tickets.</p>
+            <div class="ppe-tools"><span class="ppe-tool">GLPI</span><span class="ppe-tool">FusionInventory</span><span class="ppe-tool">MariaDB</span><span class="ppe-tool">Apache</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p4').click()">
+              <input type="file" id="f-p4" accept=".pdf" style="display:none" onchange="handlePDF('p4',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p4"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p5">
+          <div class="ppe-card-head" onclick="togglePPE('p5')">
+            <div class="ppe-left">
+              <div class="ppe-num">05</div>
+              <div><div class="ppe-title">Partage de fichiers Samba</div><div class="ppe-subtitle">SMB · Debian 12 · Partage réseau</div></div>
+            </div>
+            <span class="ppe-badge">Services</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Mise en place d'un service de partage de fichiers avec Samba sur Debian 12. Configuration des partages, gestion des permissions et intégration avec un domaine Active Directory.</p>
+            <div class="ppe-tools"><span class="ppe-tool">Samba</span><span class="ppe-tool">Debian 12</span><span class="ppe-tool">SMB</span><span class="ppe-tool">Active Directory</span><span class="ppe-tool">ACL</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p5').click()">
+              <input type="file" id="f-p5" accept=".pdf" style="display:none" onchange="handlePDF('p5',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p5"></div>
+          </div></div>
+        </div>
+
+        <div class="ppe-card" id="p6">
+          <div class="ppe-card-head" onclick="togglePPE('p6')">
+            <div class="ppe-left">
+              <div class="ppe-num">06</div>
+              <div><div class="ppe-title">Sauvegarde automatique Windows Server</div><div class="ppe-subtitle">Backup · Planification · Restauration</div></div>
+            </div>
+            <span class="ppe-badge">Sauvegarde</span>
+            <span class="ppe-chevron">▶</span>
+          </div>
+          <div class="ppe-body"><div class="ppe-content">
+            <p class="ppe-desc">Mise en place d'un système de sauvegarde automatique sous Windows Server. Stratégie 3-2-1, tâches planifiées, tests de restauration et monitoring des sauvegardes.</p>
+            <div class="ppe-tools"><span class="ppe-tool">Windows Server</span><span class="ppe-tool">Veeam</span><span class="ppe-tool">Task Scheduler</span><span class="ppe-tool">ReFS</span></div>
+            <div class="pdf-zone" onclick="document.getElementById('f-p6').click()">
+              <input type="file" id="f-p6" accept=".pdf" style="display:none" onchange="handlePDF('p6',this)">
+              <div class="pdf-zone-icon">📄</div>
+              <div class="pdf-zone-title">Déposer la procédure PDF</div>
+              <div class="pdf-zone-sub">Cliquez pour sélectionner un fichier</div>
+            </div>
+            <div id="pd-p6"></div>
+          </div></div>
+        </div>
+
       </div>
     </div>
   </section>
 </div><!-- /page-ppe -->
+
 <!-- ══════════════════════════════════════
      PAGE : PROJETS PERSONNELS
 ══════════════════════════════════════ -->
@@ -770,8 +946,9 @@ nav{
     </div>
   </section>
 </div><!-- /page-projects -->
+
 <!-- ══════════════════════════════════════
-     PAGE : CONTACT   ← SEULE PARTIE MODIFIÉE
+     PAGE : CONTACT
 ══════════════════════════════════════ -->
 <div class="page" id="page-contact">
   <section class="section">
@@ -800,21 +977,21 @@ nav{
         </div>
         <div class="contact-form-card">
           <div class="form-title">Envoyer un message</div>
-          <form class="cform" id="contactForm">
+          <form class="cform" onsubmit="submitForm(event)">
             <div class="fields-row">
-              <div class="field"><label>Nom</label><input type="text" name="nom" placeholder="Votre nom" required></div>
-              <div class="field"><label>Email</label><input type="email" name="email" placeholder="votre@email.com" required></div>
+              <div class="field"><label>Nom</label><input type="text" placeholder="Votre nom" required></div>
+              <div class="field"><label>Email</label><input type="email" placeholder="votre@email.com" required></div>
             </div>
-            <div class="field"><label>Sujet</label><input type="text" name="sujet" placeholder="Objet du message" required></div>
-            <div class="field"><label>Message</label><textarea name="message" placeholder="Votre message..." required></textarea></div>
+            <div class="field"><label>Sujet</label><input type="text" placeholder="Objet du message"></div>
+            <div class="field"><label>Message</label><textarea placeholder="Votre message..." required></textarea></div>
             <button type="submit" class="btn-submit" id="submitBtn">Envoyer le message →</button>
-            <div id="formStatus"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
 </div><!-- /page-contact -->
+
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-inner">
@@ -831,46 +1008,59 @@ nav{
     </div>
   </div>
 </footer>
+
 <script>
 /* ── THEME ── */
 const html = document.documentElement;
 let dark = false;
 const moonSVG = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
-const sunSVG = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+const sunSVG  = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
 function toggleTheme(){
   dark = !dark;
   html.setAttribute('data-theme', dark ? 'dark' : 'light');
   document.getElementById('theme-icon-svg').innerHTML = dark ? sunSVG : moonSVG;
 }
+
 /* ── NAV ACTIVE ── */
 const scrollNavMap = {accueil:'nl-accueil', apropos:'nl-apropos', competences:'nl-comp'};
-const pageNavMap = {home:'nl-accueil', ppe:'nl-ppe', projects:'nl-proj', contact:'nl-cont'};
+const pageNavMap   = {home:'nl-accueil', ppe:'nl-ppe', projects:'nl-proj', contact:'nl-cont'};
 function setNavActive(id){
   document.querySelectorAll('.nav-pill-bar a').forEach(a => a.classList.remove('active'));
   const el = document.getElementById(id);
   if(el) el.classList.add('active');
 }
+
 /* ── PAGES ── */
 const pages = ['home','ppe','projects','contact'];
 let currentPage = 'home';
 let isTransitioning = false;
+
 function showPage(p){
   if(p === currentPage || isTransitioning) return;
   isTransitioning = true;
+
   const outEl = document.getElementById('page-' + currentPage);
-  const inEl = document.getElementById('page-' + p);
+  const inEl  = document.getElementById('page-' + p);
+
+  // Fade out current page
   outEl.style.transition = 'opacity .22s ease, transform .22s ease';
   outEl.style.opacity = '0';
   outEl.style.transform = 'translateY(-8px)';
+
   setTimeout(() => {
+    // Hide old, show new
     outEl.classList.remove('active','page-visible');
     outEl.style.opacity = '';
     outEl.style.transform = '';
     outEl.style.transition = '';
+
     inEl.classList.add('active');
+    // Don't reset scroll — keep where user is
     currentPage = p;
     setNavActive(pageNavMap[p]);
     revealVisible();
+
+    // Trigger fade-in on next frame
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         inEl.classList.add('page-visible');
@@ -879,8 +1069,12 @@ function showPage(p){
     });
   }, 200);
 }
+
+// Init first page visible
 document.getElementById('page-home').classList.add('page-visible');
+
 function updateNav(p){ setNavActive(pageNavMap[p]); }
+
 /* ── SMOOTH SCROLL HOME ── */
 function smoothTo(id){
   if(currentPage !== 'home'){ showPage('home'); setTimeout(()=>smoothTo(id), 300); return; }
@@ -890,6 +1084,7 @@ function smoothTo(id){
   window.scrollTo({top, behavior:'smooth'});
   setNavActive(scrollNavMap[id] || 'nl-accueil');
 }
+
 /* ── PROGRESS BAR + SCROLL SPY ── */
 const pbar = document.getElementById('pbar');
 window.addEventListener('scroll', ()=>{
@@ -901,10 +1096,12 @@ window.addEventListener('scroll', ()=>{
     if(el && el.getBoundingClientRect().top < 130){ setNavActive(s.nk); break; }
   }
 }, {passive:true});
+
 /* ── MOBILE NAV ── */
 function closeMobile(){
   document.getElementById('navMobile').classList.remove('open');
 }
+
 /* ── PPE ACCORDION ── */
 function togglePPE(id){
   const c = document.getElementById(id);
@@ -912,6 +1109,7 @@ function togglePPE(id){
   document.querySelectorAll('.ppe-card').forEach(x=>x.classList.remove('open'));
   if(!open) c.classList.add('open');
 }
+
 /* ── PDF UPLOAD ── */
 function handlePDF(id, input){
   const file = input.files[0];
@@ -925,51 +1123,15 @@ function handlePDF(id, input){
     <iframe src="${url}" class="pdf-frame"></iframe>`;
   input.closest('.pdf-zone').style.display='none';
 }
-/* ── FORM SUBMIT (MODIFIÉ) ── */
-function submitForm(e) {
-  e.preventDefault();
-  
-  const form = document.getElementById('contactForm');
-  const btn = document.getElementById('submitBtn');
-  const status = document.getElementById('formStatus');
-  
-  status.textContent = 'Envoi en cours...';
-  status.className = '';
-  btn.disabled = true;
-  btn.textContent = 'Envoi...';
-  
-  const formData = new FormData(form);
-  
-  fetch('https://script.google.com/macros/s/AKfycbwlwqkpfd8i9F0BoBSIRKyZ1ESXVTZvwtUC0pqCM02jz0qr3M3C0fcmOmj36gV6u2BL/exec', {
-    method: 'POST',
-    body: formData,
-    mode: 'no-cors'  // Nécessaire pour Google Apps Script depuis GitHub Pages
-  })
-  .then(() => {
-    // Comme no-cors ne renvoie pas de réponse lisible, on assume succès si pas d'erreur réseau
-    status.textContent = '✓ Message envoyé avec succès !';
-    status.className = 'success';
-    btn.classList.add('ok');
-    btn.textContent = 'Envoyé !';
-    form.reset();
-    
-    setTimeout(() => {
-      status.textContent = '';
-      btn.classList.remove('ok');
-      btn.textContent = 'Envoyer le message →';
-      btn.disabled = false;
-    }, 4000);
-  })
-  .catch(err => {
-    console.error(err);
-    status.textContent = 'Erreur lors de l\'envoi. Réessayez ou contactez-moi directement par email.';
-    status.className = 'error';
-    btn.textContent = 'Réessayer';
-    btn.disabled = false;
-  });
-}
 
-document.getElementById('contactForm').addEventListener('submit', submitForm);
+/* ── FORM ── */
+function submitForm(e){
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = '✓ Message envoyé !';
+  btn.classList.add('ok');
+  setTimeout(()=>{ btn.textContent='Envoyer le message →'; btn.classList.remove('ok'); e.target.reset(); }, 3000);
+}
 
 /* ── SCROLL REVEAL ── */
 function revealVisible(){
@@ -980,6 +1142,8 @@ function revealVisible(){
 }
 window.addEventListener('scroll', revealVisible, {passive:true});
 revealVisible();
+
+// On page load, mark accueil active
 updateNav('home');
 </script>
 </body>
