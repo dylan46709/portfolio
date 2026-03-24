@@ -312,6 +312,7 @@ nav{
 .btn-submit{padding:.72rem;background:var(--ink);color:var(--bg);border-radius:var(--r);font-family:var(--font);font-size:.85rem;font-weight:600;border:none;cursor:pointer;transition:background .2s,transform .15s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
 .btn-submit:hover{transform:translateY(-1px);background:var(--ink2)}
 .btn-submit.ok{background:var(--success)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
 
 /* ══════════════════════════════════════
    FOOTER
@@ -704,13 +705,13 @@ footer{background:var(--card);border-top:1px solid var(--border);padding:1.6rem 
         </div>
         <div class="contact-form-card">
           <div class="form-title">Envoyer un message</div>
-          <form class="cform" onsubmit="submitForm(event)">
+          <form class="cform" id="contactForm" onsubmit="submitForm(event)">
             <div class="fields-row">
-              <div class="field"><label>Nom</label><input type="text" placeholder="Votre nom" required></div>
-              <div class="field"><label>Email</label><input type="email" placeholder="votre@email.com" required></div>
+              <div class="field"><label>Nom</label><input type="text" id="f-nom" placeholder="Votre nom" required></div>
+              <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="votre@email.com" required></div>
             </div>
-            <div class="field"><label>Sujet</label><input type="text" placeholder="Objet du message"></div>
-            <div class="field"><label>Message</label><textarea placeholder="Votre message..." required></textarea></div>
+            <div class="field"><label>Sujet</label><input type="text" id="f-sujet" placeholder="Objet du message"></div>
+            <div class="field"><label>Message</label><textarea id="f-message" placeholder="Votre message..." required></textarea></div>
             <button type="submit" class="btn-submit" id="submitBtn">Envoyer le message →</button>
           </form>
         </div>
@@ -823,13 +824,37 @@ function togglePPE(id){
   if(!open) c.classList.add('open');
 }
 
-/* ── FORM ── */
-function submitForm(e){
+/* ── FORM — intégration Google Apps Script ── */
+const FORM_URL = 'https://script.google.com/macros/s/AKfycbwlwqkpfd8i9F0BoBSIRKyZ1ESXVTZvwtUC0pqCM02jz0qr3M3C0fcmOmj36gV6u2BL/exec';
+
+async function submitForm(e){
   e.preventDefault();
   const btn = document.getElementById('submitBtn');
-  btn.textContent = '✓ Message envoyé !';
-  btn.classList.add('ok');
-  setTimeout(()=>{ btn.textContent='Envoyer le message →'; btn.classList.remove('ok'); e.target.reset(); }, 3000);
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours…';
+
+  const payload = new FormData();
+  payload.append('nom',     document.getElementById('f-nom').value.trim());
+  payload.append('email',   document.getElementById('f-email').value.trim());
+  payload.append('sujet',   document.getElementById('f-sujet').value.trim());
+  payload.append('message', document.getElementById('f-message').value.trim());
+
+  try {
+    await fetch(FORM_URL, { method: 'POST', body: payload, mode: 'no-cors' });
+    btn.textContent = '✓ Message envoyé !';
+    btn.classList.add('ok');
+    document.getElementById('contactForm').reset();
+  } catch(err) {
+    btn.textContent = '✗ Erreur — réessayez';
+    btn.style.background = '#DC2626';
+  } finally {
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = 'Envoyer le message →';
+      btn.classList.remove('ok');
+      btn.style.background = '';
+    }, 3500);
+  }
 }
 
 /* ── SCROLL REVEAL ── */
